@@ -8,26 +8,76 @@
 </head>
 <body>
   <div class="container">
-    <div class="item item1">Item 01</div>
-    <div class="item item2">Bonjour!</div>
-    <div class="item item3">Item 03</div>
-    <div class="item item4">Item 04</div>
+    <div class="item item1">
+      <p>I'm Sidebar #1</p>
+    </div>
+    <div class="item item2">
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore, sed.</p>
+      <p>Lorem ipsum d</p>
+    </div>
+    <div class="item item3">
+      <p>I'm Sidebar #2</p>
+    </div>
+    <div class="item footer">
+      <p>I'm the footer</p>
+    </div>
   </div>
 
   <style>
     .container {
       display: grid;
       grid-gap: 20px;
-      border: 10px solid var(--yellow);
-      /* grid-template-columns: repeat(auto-fill, 150px); */
-      /* grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); */
 
-      /* grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); */
-
-      /* grid-template-columns: auto 150px 150px 150px; */
-      grid-template-columns: fit-content(100px) 150px 150px 150px;
+      grid-template-columns: 1fr 500px 1fr;
+      grid-template-rows: 150px 150px 100px;
+      grid-template-areas: 
+        "sidebar-1 content sidebar-2"
+        "sidebar-1 content sidebar-2"
+        "footer footer footer"
     }
+
+    .footer {
+      grid-area: footer;
+    }
+
+    .item1 {
+      grid-area: sidebar-1;
+    }
+    .item2 {
+      grid-area: content;
+    }
+    .item3 {
+      grid-area: sidebar-2;
+    }
+
+    @media(max-width: 700px){
+      .container {
+        background: redim0n
+        ;
+      }
+    }
+
   </style>
+  <script>
+   function listAttributes() {
+     var paragraph = document.getElementById("paragraph");
+     var result = document.getElementById("result");
+
+     // First, let's verify that the paragraph has some attributes
+     if (paragraph.hasAttributes()) {
+       var attrs = paragraph.attributes;
+       var output = "";
+       for(var i = attrs.length - 1; i >= 0; i--) {
+         output += attrs[i].name + "->" + attrs[i].value;
+       }
+       result.value = output;
+     } else {
+       result.value = "No attributes to show";
+     }
+   }
+  
+
+  </script>
   
   <script src="myBundle.js"></script>
 </body>
