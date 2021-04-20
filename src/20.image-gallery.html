@@ -1,19 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>CSS Grid Image Gallery!</title>
 </head>
 
 <body>
-<!--
-  Use browser sync instead!!!!
-index.js :
-  import '../src/css/gallery.css';
-  
-  -->
 
   <div class="overlay">
     <div class="overlay-inner">
@@ -27,7 +22,7 @@ index.js :
 
 
   <style>
-     * {
+    * {
       box-sizing: border-box;
     }
 
@@ -76,6 +71,7 @@ index.js :
       width: 100%;
       height: 100%;
       object-fit: cover;
+
     }
 
     .item__overlay {
@@ -90,19 +86,18 @@ index.js :
       transform: translateY(100%);
     }
 
+    .item:hover .item__overlay {
+      transform: translateY(0);
+    }
+
     .item__overlay button {
       background: none;
-      border: 2px solid white;
+      border: 2px solid whi;
       color: white;
       text-transform: uppercase;
       background: rgba(0, 0, 0, 0.7);
       padding: 5px;
     }
-
-    .item:hover .item__overlay {
-      transform: translateY(0);
-    }
-
 
     .item.v2 {
       grid-row: span 2;
@@ -116,15 +111,15 @@ index.js :
       grid-row: span 4;
     }
 
-    .item.h2 {
+    .item.v2 {
       grid-column: span 2;
     }
 
-    .item.h3 {
+    .item.v3 {
       grid-column: span 3;
     }
 
-    .item.h4 {
+    .item.v4 {
       grid-column: span 4;
     }
 
@@ -148,27 +143,28 @@ index.js :
 
     .overlay-inner {
       background: white;
-      width: 700px;
+      width: 500px;
       padding: 20px;
     }
 
     .overlay img {
       width: 100%;
     }
+
+
   </style>
-  
 
   <script>
     const gallery = document.querySelector('.gallery');
     const overlay = document.querySelector('.overlay');
-    const overlayImage = document.querySelector('img');
-    const overlayClose = document.querySelector('.close');
+    const overlayImage = overlay.querySelector('img');
+    const overlayClose = overlay.querySelector('.close');
 
     function generateHTML([h, v]) {
       return `
         <div class="item h${h} v${v}">
-          <img src="images/1.jpg">
-          <div class="img__overlay">
+          <img src="image-gallery/images/${randomNumber(12)}.jpg">
+          <div class="item__overlay">
             <button>View →</button>
           </div>
         </div>
@@ -179,19 +175,42 @@ index.js :
       return Math.floor(Math.random() * limit) + 1;
     }
 
-    const digits = Array.from({ length: 50}, () => [randomNumber(4), randomNumber(4)]).concat([[1,1],[1,1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1]]);
+    function handleClick(e){
+      // console.log(e.currentTarget);
+      const src = e.currentTarget.querySelector('img').src;
+      // console.log(src);
+     overlayImage.src = src;
+      // open();
+      overlay.classList.add('open');
+    }
 
+    /* function open(){
+      overlay.classList.add('open');
+    // } */
+
+    function close(){
+      overlay.classList.remove('open');
+    }
+
+    const digits = Array.from({ length: 50 }, () => [randomNumber(4), randomNumber(4)]);
     // console.log(digits);
 
-    const html = digits.map(generateHTML).join('');
+    const html = digits.map(generateHTML).join('').concat([[1,1],[1,1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1]]);
     // console.log(html);
+
     gallery.innerHTML = html;
+
+    const items = document.querySelectorAll('.item');
+
+    items.forEach(item => item.addEventListener('click', handleClick));
+
+    overlayClose.addEventListener('click', close);
+
+
 
 
 
   </script>
-
-  
-  <!-- <script src="myBundle_gallery.js"></script> -->
 </body>
+
 </html>
