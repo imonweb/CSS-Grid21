@@ -21,14 +21,31 @@
     <div class="item">Short</div>
   </div>
   <style>
-    .flex-container {}
+    .flex-container {
+      display: flex;
+      flex-wrap: wrap;
+    }
 
     .flex-container>* {
+      flex: 1;
       margin: 10px;
     }
-  </style>
 
-    <script src="myBundle.js"></script>
+
+
+    .item {
+
+      display: grid;
+      justify-content: center;
+      align-items: center;
+      border: 5px solid rgba(0, 0, 0, 0.03);
+      border-radius: 3px;
+      font-size: 35px;
+      background-color: var(--yellow);
+      /* best colour */
+    }
+  </style>
+  <script src="myBundle.js"></script>
 </body>
 
 </html>
